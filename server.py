@@ -1,9 +1,7 @@
 import time
 
-import eventlet.wsgi
 import pygame
-import socketio
-from flask import Flask
+from flask import Flask, request, abort, make_response
 from neopixel import *
 
 SCREEN_X = 62
@@ -25,7 +23,6 @@ LED_STRIP = ws.WS2811_STRIP_GRB
 pygame.display.set_mode((SCREEN_X * P_MFACTOR, SCREEN_Y * P_MFACTOR))
 
 # Init socketio and Flask
-sio = socketio.Server()
 app = Flask(__name__)
 
 # Disabling green onboard LED to indicate progress in headless run
@@ -38,10 +35,11 @@ strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT,
 strip.begin()
 
 
-@sio.on('/frame')
-def message(sid, data):
+@app.route('/frame/json', methods=['POST'])
+def frame():
+    data = request.get_json(force=True)
     if not data:
-        return
+        abort(400)
 
     blink_onboard_led()
 
@@ -54,11 +52,12 @@ def message(sid, data):
     strip.show()
     pygame.display.flip()
     pygame.event.get()
+    return make_response('OK', 200)
 
 
 def get_rgb(data, (x, y)):
     try:
-        (r, g, b) = data[str(y) + ',' + str(x)]
+        (r, g, b) = data[x][y]
     except:
         r, g, b = 0, 0, 0
     return r, g, b
@@ -72,16 +71,6 @@ def set_pixel_color((x, y), (r, g, b)):
     strip.setPixelColor(i, Color(r, g, b))
 
 
-@sio.on('connect')
-def connect(sid, environ):
-    print("connect ", sid)
-
-
-@sio.on('disconnect')
-def disconnect(sid):
-    print('disconnect ', sid)
-
-
 def blink_onboard_led():
     led = open('/sys/class/leds/led0/brightness', 'w')
     led.write('1')
@@ -93,8 +82,4 @@ def blink_onboard_led():
 
 
 if __name__ == '__main__':
-    # wrap Flask application with engineio's middleware
-    app = socketio.Middleware(sio, app)
-
-    # deploy as an eventlet WSGI server
-    eventlet.wsgi.server(eventlet.listen(('', PORT)), app)
+    app.run()
