@@ -1,9 +1,9 @@
-import time
-
 import pygame
 from flask import Flask, request, abort, make_response
 from neopixel import *
 from scipy import misc
+
+from utils import blink_onboard_led, reset_onboard_led
 
 SCREEN_X = 62
 SCREEN_Y = 31
@@ -30,10 +30,7 @@ if not NO_PREVIEW:
 # Init socketio and Flask
 app = Flask(__name__)
 
-# Disabling green onboard LED to indicate progress in headless run
-led_trigger = open('/sys/class/leds/led0/trigger', 'w')
-led_trigger.write('gpio')
-led_trigger.close()
+reset_onboard_led()
 
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT,
                           LED_BRIGHTNESS, LED_CHANNEL, LED_STRIP)
@@ -100,16 +97,6 @@ def set_pixel_color((x, y), (r, g, b)):
     else:
         i = x * SCREEN_Y + y
     strip.setPixelColor(i, Color(r, g, b))
-
-
-def blink_onboard_led():
-    led = open('/sys/class/leds/led0/brightness', 'w')
-    led.write('1')
-    led.close()
-    time.sleep(0.05)
-    led = open('/sys/class/leds/led0/brightness', 'w')
-    led.write('0')
-    led.close()
 
 
 if __name__ == '__main__':
