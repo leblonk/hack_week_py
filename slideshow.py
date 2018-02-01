@@ -56,6 +56,8 @@ def get_rgb(data, (x, y)):
 if __name__ == '__main__':
     while True:
         for blob in bucket.list_blobs():
+            print("Display " + str(blob))
+
             # saving to a temp file because imread cannot read binary from memory
             tmp_file = open('tmp', 'wb')
             blob.download_to_file(tmp_file)
