@@ -55,18 +55,22 @@ def get_rgb(data, (x, y)):
 
 if __name__ == '__main__':
     while True:
+        # allowing only blobs - files need to be < 1MB
         for blob in bucket.list_blobs():
             print("Display " + str(blob))
 
             # saving to a temp file because imread cannot read binary from memory
-            tmp_file = open('tmp', 'wb')
-            blob.download_to_file(tmp_file)
-            tmp_file.close()
+            try:
+                tmp_file = open('tmp', 'wb')
+                blob.download_to_file(tmp_file)
+                tmp_file.close()
 
-            image_data = misc.imread('tmp')
+                image_data = misc.imread('tmp')
 
-            blink_onboard_led()
+                blink_onboard_led()
 
-            update_screen(image_data)
+                update_screen(image_data)
+            except:
+                print("Error displaying blob")
 
             time.sleep(DELAY_SECONDS)
