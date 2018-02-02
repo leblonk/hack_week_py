@@ -1,3 +1,4 @@
+import netifaces as ni
 import time
 
 
@@ -16,3 +17,8 @@ def blink_onboard_led():
     led = open('/sys/class/leds/led0/brightness', 'w')
     led.write('0')
     led.close()
+
+
+def get_ip_address(ifname):
+    ni.ifaddresses(ifname)
+    return ni.ifaddresses(ifname)[ni.AF_INET][0]['addr']

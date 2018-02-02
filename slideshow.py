@@ -1,12 +1,13 @@
 import time
 
 import pygame
+from PIL import Image, ImageDraw
 from google.cloud import storage
 from neopixel import *
 from scipy import misc
 
 from config import *
-from utils import blink_onboard_led, reset_onboard_led
+from utils import get_ip_address, blink_onboard_led, reset_onboard_led
 
 DELAY_SECONDS = 5
 
@@ -53,7 +54,24 @@ def get_rgb(data, (x, y)):
     return r, g, b
 
 
+def display_ip():
+    try:
+        ip = get_ip_address('wlan0')
+        print(ip)
+        for addr in ip.split('.'):
+            img = Image.new('RGB', (60, 30), color='black')
+            d = ImageDraw.Draw(img)
+            d.text((10, 10), addr, fill=(255, 255, 255))
+            img.save('ip.png')
+            ip_image = misc.imread('ip.png')
+            update_screen(ip_image)
+            time.sleep(1)
+    except:
+        print('error displaying ip')
+
+
 if __name__ == '__main__':
+    display_ip()
     while True:
         # allowing only blobs - files need to be < 1MB
         for blob in bucket.list_blobs():
