@@ -40,11 +40,11 @@ def frame_image():
         abort(400)
 
     # saving to a temp file because imread cannot read binary from memory
-    tmp_file = open('tmp', 'wb')
+    tmp_file = open('/tmp/led_frame', 'wb')
     tmp_file.write(data)
     tmp_file.close()
 
-    image_data = misc.imread('tmp')
+    image_data = misc.imread('/tmp/led_frame')
 
     blink_onboard_led()
 

@@ -62,8 +62,8 @@ def display_ip():
             img = Image.new('RGB', (60, 30), color='black')
             d = ImageDraw.Draw(img)
             d.text((10, 10), addr, fill=(255, 255, 255))
-            img.save('ip.png')
-            ip_image = misc.imread('ip.png')
+            img.save('/tmp/ip.png')
+            ip_image = misc.imread('/tmp/ip.png')
             update_screen(ip_image)
             time.sleep(1)
     except:
@@ -79,11 +79,11 @@ if __name__ == '__main__':
 
             # saving to a temp file because imread cannot read binary from memory
             try:
-                tmp_file = open('tmp', 'wb')
+                tmp_file = open('/tmp/led_blob', 'wb')
                 blob.download_to_file(tmp_file)
                 tmp_file.close()
 
-                image_data = misc.imread('tmp')
+                image_data = misc.imread('/tmp/led_blob')
 
                 blink_onboard_led()
 
