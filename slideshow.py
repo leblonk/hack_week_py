@@ -9,7 +9,7 @@ from scipy import misc
 from config import *
 from utils import get_ip_address, blink_onboard_led, reset_onboard_led, get_serial_pixel
 
-DELAY_SECONDS = 5
+DELAY_SECONDS = 0.1
 
 # Init preview screen
 if not NO_PREVIEW:
