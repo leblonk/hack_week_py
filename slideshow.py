@@ -7,7 +7,7 @@ from neopixel import *
 from scipy import misc
 
 from config import *
-from utils import get_ip_address, blink_onboard_led, reset_onboard_led
+from utils import get_ip_address, blink_onboard_led, reset_onboard_led, get_serial_pixel
 
 DELAY_SECONDS = 5
 
@@ -39,10 +39,7 @@ def update_screen(data):
 
 
 def set_pixel_color((x, y), (r, g, b)):
-    if x & 1 == 1:
-        i = (x + 1) * SCREEN_Y - y - 1
-    else:
-        i = x * SCREEN_Y + y
+    i = get_serial_pixel(x, y, SCREEN_Y)
     strip.setPixelColor(i, Color(r, g, b))
 
 

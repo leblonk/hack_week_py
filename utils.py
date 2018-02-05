@@ -19,6 +19,14 @@ def blink_onboard_led():
     led.close()
 
 
+def get_serial_pixel(x, y, size_y):
+    if x & 1 == 1:
+        i = (x + 1) * size_y - y - 1
+    else:
+        i = x * size_y + y
+    return i
+
+
 def get_ip_address(ifname):
     ni.ifaddresses(ifname)
     return ni.ifaddresses(ifname)[ni.AF_INET][0]['addr']
