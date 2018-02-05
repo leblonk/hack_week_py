@@ -48,8 +48,9 @@ if __name__ == '__main__':
         for y in range(SCREEN_Y):
             data = [[0] * SCREEN_X for i in range(SCREEN_Y)]
             try:
+                print("Displaying ({}, {})".format(y, x))
                 data[y][x] = (255, 255, 255)
                 update_screen(data)
             except:
-                print("failed on pixel", x, y)
+                print("failed on pixel ({}, {})".format(y, x))
             time.sleep(0.5)
