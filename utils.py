@@ -1,10 +1,10 @@
 import netifaces as ni
 import time
 
-gpio_export = open('/sys/class/gpio/export')
+gpio_export = open('/sys/class/gpio/export', 'w')
 gpio_export.write('4')
 gpio_export.close()
-gpio_direction = open('/sys/class/gpio/gpio4/direction')
+gpio_direction = open('/sys/class/gpio/gpio4/direction', 'w')
 gpio_direction.write('in')
 gpio_export.close()
 
