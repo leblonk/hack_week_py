@@ -16,3 +16,5 @@ LED_BRIGHTNESS = 255
 LED_INVERT = False
 LED_CHANNEL = 1  # set to '1' for GPIOs pins 13, 19, 41, 45 or 53
 LED_STRIP = ws.WS2811_STRIP_GRB
+
+SWITCH = 3  # switch for test vs display
