@@ -9,6 +9,11 @@ from utils import get_ip_address, blink_onboard_led, reset_onboard_led, get_seri
 
 reset_onboard_led()
 
+print('start')
+switch = open('/sys/class/gpio/gpio4/value', 'r')
+statusStr = switch.read().strip()
+print('status' + statusStr)
+
 if __name__ == '__main__':
     if read_test_switch():
         test_main()
