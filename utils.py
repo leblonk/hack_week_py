@@ -5,7 +5,7 @@ from config import SWITCH
 gpio_export = open('/sys/class/gpio/export', 'w')
 gpio_export.write(str(SWITCH))
 gpio_export.close()
-gpio_direction = open('/sys/class/gpio/gpio' + SWITCH + '/direction', 'w')
+gpio_direction = open('/sys/class/gpio/gpio' + str(SWITCH) + '/direction', 'w')
 gpio_direction.write('in')
 gpio_export.close()
 
@@ -27,7 +27,7 @@ def blink_onboard_led():
     led.close()
 
 def read_test_switch():
-    switch = open('/sys/class/gpio/gpio' + SWITCH + '/value', 'r')
+    switch = open('/sys/class/gpio/gpio' + str(SWITCH) + '/value', 'r')
     statusStr = switch.read().strip()
     print('status' + statusStr)
     status = int(statusStr)
