@@ -20,11 +20,6 @@ root.addHandler(ch)
 logging.error('error')
 reset_onboard_led()
 
-print('start\n')
-switch = open('/sys/class/gpio/gpio4/value', 'r')
-statusStr = switch.read().strip()
-print('status' + statusStr + '\n')
-
 if __name__ == '__main__':
     if read_test_switch():
         test_main()
