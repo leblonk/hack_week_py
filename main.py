@@ -1,14 +1,23 @@
 import time
 
 import pygame
+import logging
+import sys
 
 from config import *
 from slideshow import slideshow_main
 from test import test_main
 from utils import get_ip_address, blink_onboard_led, reset_onboard_led, get_serial_pixel, read_test_switch
 
-sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
+root = logging.getLogger()
+root.setLevel(logging.DEBUG)
 
+ch = logging.StreamHandler(sys.stdout)
+ch.setLevel(logging.DEBUG)
+
+root.addHandler(ch)
+
+logging.error('error')
 reset_onboard_led()
 
 print('start\n')
