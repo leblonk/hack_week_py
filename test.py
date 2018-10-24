@@ -3,6 +3,7 @@ import time
 from neopixel import *
 
 from config import *
+from utils import blink_onboard_led
 
 strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA,
                           LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL,
@@ -22,6 +23,7 @@ def test_main():
             strip.setPixelColor(i, Color(255, 0, 0))
         strip.show()
 
+        blink_onboard_led()
         time.sleep(1)
         led = open('/sys/class/leds/led0/brightness', 'w')
         led.write('0')
@@ -31,9 +33,11 @@ def test_main():
             strip.setPixelColor(i, Color(0, 255, 0))
         strip.show()
 
+        blink_onboard_led()
         time.sleep(1)
         for i in range(LED_COUNT):
             strip.setPixelColor(i, Color(0, 0, 255))
         strip.show()
 
+        blink_onboard_led()
         time.sleep(1)
