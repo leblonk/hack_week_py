@@ -21,7 +21,7 @@ def blink_onboard_led():
 def read_test_switch():
     switch = open('/sys/class/gpio/gpio4/value', 'r')
     statusStr = switch.read().strip()
-    print('status' + statusStr)
+    print('status' + statusStr, flush=True)
     status = int(statusStr)
     return status > 100
 
