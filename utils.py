@@ -8,6 +8,7 @@ with open('/sys/class/gpio/export', 'w') as gpio_export:
 print('setting up switch direction for ' + str(SWITCH))
 with open('/sys/class/gpio/gpio%d/direction' % SWITCH, 'w') as gpio_direction:
     gpio_direction.write('in\n')
+print('done setting up switch ' + str(SWITCH))
 
 
 def reset_onboard_led():
