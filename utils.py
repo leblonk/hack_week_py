@@ -3,15 +3,11 @@ import time
 from config import SWITCH
 
 print('setting up switch on ' + str(SWITCH))
-gpio_export = open('/sys/class/gpio/export', 'w')
-gpio_export.write(str(SWITCH))
-gpio_export.flush()
-gpio_export.close()
+with open('/sys/class/gpio/export', 'w') as gpio_export:
+    gpio_export.write("%d\n" % SWITCH)
 print('setting up switch direction for ' + str(SWITCH))
-gpio_direction = open('/sys/class/gpio/gpio' + str(SWITCH) + '/direction', 'w')
-gpio_direction.write('in')
-gpio_direction.flush()
-gpio_direction.close()
+with open('/sys/class/gpio/gpio%d/direction' % SWITCH, 'w') as gpio_direction:
+    gpio_direction.write('in\n')
 
 
 def reset_onboard_led():
@@ -33,7 +29,7 @@ def blink_onboard_led():
 def read_test_switch():
     print('reading switch ' + str(SWITCH))
 
-    switch = open('/sys/class/gpio/gpio' + str(SWITCH) + '/value', 'r')
+    switch = open('/sys/class/gpio/gpio%d/value' % SWITCH, 'r')
     statusStr = switch.read().strip()
     switch.close()
     print('switch status ' + statusStr)
