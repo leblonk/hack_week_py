@@ -11,10 +11,10 @@ sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)
 
 reset_onboard_led()
 
-print('start')
+print('start\n')
 switch = open('/sys/class/gpio/gpio4/value', 'r')
 statusStr = switch.read().strip()
-print('status' + statusStr)
+print('status' + statusStr + '\n')
 
 if __name__ == '__main__':
     if read_test_switch():
