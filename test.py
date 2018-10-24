@@ -37,5 +37,3 @@ def test_main():
         strip.show()
 
         time.sleep(1)
-
-test_main()
