@@ -12,7 +12,7 @@ from utils import get_ip_address, blink_onboard_led, reset_onboard_led, get_seri
 root = logging.getLogger()
 root.setLevel(logging.DEBUG)
 
-ch = logging.StreamHandler(sys.stdout)
+ch = logging.StreamHandler(sys.stderr)
 ch.setLevel(logging.DEBUG)
 
 root.addHandler(ch)
