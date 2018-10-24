@@ -22,7 +22,7 @@ strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT,
 strip.begin()
 
 client = storage.Client()
-bucket = client.get_bucket("adstudio-led")
+bucket = client.get_bucket("big-led-screen-data")
 
 
 def update_screen(data):
