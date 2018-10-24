@@ -88,7 +88,3 @@ def slideshow_main():
                 print("Error displaying blob")
 
             time.sleep(DELAY_SECONDS)
-
-
-if __name__ == '__main__':
-    slideshow_main()

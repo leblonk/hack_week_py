@@ -25,8 +25,8 @@ switch = open('/sys/class/gpio/gpio4/value', 'r')
 statusStr = switch.read().strip()
 print('status' + statusStr + '\n')
 
-# if __name__ == '__main__':
-#     if read_test_switch():
-#         test_main()
-#     else:
-#         slideshow_main();
+if __name__ == '__main__':
+    if read_test_switch():
+        test_main()
+    else:
+        slideshow_main();

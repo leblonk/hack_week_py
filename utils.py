@@ -1,6 +1,13 @@
 import netifaces as ni
 import time
 
+gpio_export = open('/sys/class/gpio/export')
+gpio_export.write('4')
+gpio_export.close()
+gpio_direction = open('/sys/class/gpio/gpio4/direction')
+gpio_direction.write('in')
+gpio_export.close()
+
 
 def reset_onboard_led():
     # Disable green onboard LED to indicate progress in headless run
@@ -23,7 +30,7 @@ def read_test_switch():
     statusStr = switch.read().strip()
     print('status' + statusStr)
     status = int(statusStr)
-    return status > 100
+    return status >= 1
 
 def get_serial_pixel(x, y, size_y):
     if x & 1 == 1:
