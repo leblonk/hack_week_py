@@ -7,6 +7,8 @@ from neopixel import *
 from scipy import misc
 
 from config import *
+from slideshow import slideshow_main
+from test import test_main
 from utils import get_ip_address, blink_onboard_led, reset_onboard_led, get_serial_pixel
 
 DELAY_SECONDS = 0.1
@@ -66,29 +68,9 @@ def display_ip():
     except:
         print('error displaying ip')
 
-def slideshow_main():
-    display_ip()
-    while True:
-        # allowing only blobs - files need to be < 1MB
-        for blob in bucket.list_blobs():
-            print("Display " + str(blob))
-
-            # saving to a temp file because imread cannot read binary from memory
-            try:
-                tmp_file = open('/tmp/led_blob', 'wb')
-                blob.download_to_file(tmp_file)
-                tmp_file.close()
-
-                image_data = misc.imread('/tmp/led_blob')
-
-                blink_onboard_led()
-
-                update_screen(image_data)
-            except:
-                print("Error displaying blob")
-
-            time.sleep(DELAY_SECONDS)
-
 
 if __name__ == '__main__':
-    slideshow_main()
+    if read_test_switch():
+        test_main()
+    else:
+        slideshow_main();

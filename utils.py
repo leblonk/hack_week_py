@@ -18,6 +18,12 @@ def blink_onboard_led():
     led.write('0')
     led.close()
 
+def read_test_switch():
+    switch = open('/sys/class/gpio/gpio4/value', 'r')
+    statusStr = switch.read().strip()
+    print('status' + statusStr)
+    status = int(statusStr)
+    return status > 100
 
 def get_serial_pixel(x, y, size_y):
     if x & 1 == 1:
