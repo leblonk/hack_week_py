@@ -3,7 +3,7 @@ from test import test_main
 from utils import reset_onboard_led, read_test_switch
 
 print('starting...')
-reset_onboard_led()
+#reset_onboard_led()
 
 # if __name__ == '__main__':
 #     if read_test_switch():
