@@ -1,5 +1,5 @@
-from slideshow import slideshow_main
-from test import test_main
+#from slideshow import slideshow_main
+#from test import test_main
 from utils import reset_onboard_led, read_test_switch
 
 print('starting...')
