@@ -9,7 +9,7 @@ gpio_export.close()
 print('setting up switch direction for ' + str(SWITCH))
 gpio_direction = open('/sys/class/gpio/gpio' + str(SWITCH) + '/direction', 'w')
 gpio_direction.write('in')
-gpio_export.close()
+gpio_direction.close()
 
 
 def reset_onboard_led():
