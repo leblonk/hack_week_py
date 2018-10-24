@@ -5,10 +5,12 @@ from config import SWITCH
 print('setting up switch on ' + str(SWITCH))
 gpio_export = open('/sys/class/gpio/export', 'w')
 gpio_export.write(str(SWITCH))
+gpio_export.flush()
 gpio_export.close()
 print('setting up switch direction for ' + str(SWITCH))
 gpio_direction = open('/sys/class/gpio/gpio' + str(SWITCH) + '/direction', 'w')
 gpio_direction.write('in')
+gpio_direction.flush()
 gpio_direction.close()
 
 
