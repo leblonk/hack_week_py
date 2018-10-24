@@ -2,9 +2,11 @@ import netifaces as ni
 import time
 from config import SWITCH
 
+print('setting up switch on ' + str(SWITCH))
 gpio_export = open('/sys/class/gpio/export', 'w')
 gpio_export.write(str(SWITCH))
 gpio_export.close()
+print('setting up switch direction for ' + str(SWITCH))
 gpio_direction = open('/sys/class/gpio/gpio' + str(SWITCH) + '/direction', 'w')
 gpio_direction.write('in')
 gpio_export.close()
@@ -27,9 +29,12 @@ def blink_onboard_led():
     led.close()
 
 def read_test_switch():
+    print('reading switch ' + str(SWITCH))
+
     switch = open('/sys/class/gpio/gpio' + str(SWITCH) + '/value', 'r')
     statusStr = switch.read().strip()
-    print('status' + statusStr)
+    switch.close()
+    print('switch status ' + statusStr)
     status = int(statusStr)
     return status >= 1
 
