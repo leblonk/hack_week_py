@@ -1,0 +1,12 @@
+[Unit]
+Description=Giant LED screen
+After=multi-user.target
+Wants=network.target network-online.target
+
+[Service]
+Type=idle
+User=pi
+ExecStart=/home/pi/hack_week/run.sh
+
+[Install]
+WantedBy=multi-user.target
