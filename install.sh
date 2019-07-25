@@ -1,5 +1,5 @@
-sudo chmod 644 /home/pi/hack_week/run.sh
-cp /home/pi/hack_week/leddisplay.service /lib/systemd/system/leddisplay.service
+sudo chmod 644 /home/pi/hack_week_py/run.sh
+cp /home/pi/hack_week_py/leddisplay.service /lib/systemd/system/leddisplay.service
 sudo chmod 644 /lib/systemd/system/leddisplay.service
 sudo systemctl daemon-reload
 sudo systemctl enable leddisplay.service
