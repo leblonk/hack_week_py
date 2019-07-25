@@ -4,7 +4,7 @@ import pygame
 from PIL import Image, ImageDraw
 from google.cloud import storage
 from neopixel import *
-from scipy import misc
+from scipy import imageio
 
 from config import *
 from utils import get_ip_address, blink_onboard_led, reset_onboard_led, get_serial_pixel
@@ -60,7 +60,7 @@ def display_ip():
             d = ImageDraw.Draw(img)
             d.text((10, 10), addr, fill=(255, 255, 255))
             img.save('/tmp/ip.png')
-            ip_image = misc.imread('/tmp/ip.png')
+            ip_image = imageio.imread('/tmp/ip.png')
             update_screen(ip_image)
             time.sleep(1)
     except:
@@ -78,7 +78,7 @@ def slideshow_main():
             blob.download_to_file(tmp_file)
             tmp_file.close()
 
-            image_data = misc.imread('/tmp/led_blob')
+            image_data = imageio.imread('/tmp/led_blob')
 
             blink_onboard_led()
 
