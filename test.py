@@ -14,30 +14,29 @@ led_trigger = open('/sys/class/leds/led0/trigger', 'w')
 led_trigger.write('gpio')
 
 def test_main():
-    while True:
-        led = open('/sys/class/leds/led0/brightness', 'w')
-        led.write('1')
-        led.close()
+    led = open('/sys/class/leds/led0/brightness', 'w')
+    led.write('1')
+    led.close()
 
-        for i in range(LED_COUNT):
-            strip.setPixelColor(i, Color(255, 0, 0))
-        strip.show()
+    for i in range(LED_COUNT):
+        strip.setPixelColor(i, Color(255, 0, 0))
+    strip.show()
 
-        blink_onboard_led()
-        time.sleep(1)
-        led = open('/sys/class/leds/led0/brightness', 'w')
-        led.write('0')
-        led.close()
+    blink_onboard_led()
+    time.sleep(1)
+    led = open('/sys/class/leds/led0/brightness', 'w')
+    led.write('0')
+    led.close()
 
-        for i in range(LED_COUNT):
-            strip.setPixelColor(i, Color(0, 255, 0))
-        strip.show()
+    for i in range(LED_COUNT):
+        strip.setPixelColor(i, Color(0, 255, 0))
+    strip.show()
 
-        blink_onboard_led()
-        time.sleep(1)
-        for i in range(LED_COUNT):
-            strip.setPixelColor(i, Color(0, 0, 255))
-        strip.show()
+    blink_onboard_led()
+    time.sleep(1)
+    for i in range(LED_COUNT):
+        strip.setPixelColor(i, Color(0, 0, 255))
+    strip.show()
 
-        blink_onboard_led()
-        time.sleep(1)
+    blink_onboard_led()
+    time.sleep(1)
