@@ -1,4 +1,4 @@
-# from slideshow import slideshow_main
+from slideshow import slideshow_main
 from test import test_main
 from utils import reset_onboard_led, read_test_switch
 
@@ -10,4 +10,4 @@ if __name__ == '__main__':
         test_main()
     else:
         print('running slideshow')
-#        slideshow_main()
+        slideshow_main()

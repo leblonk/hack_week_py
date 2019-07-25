@@ -7,3 +7,4 @@ else
     sudo git pull origin master
 fi
 GOOGLE_APPLICATION_CREDENTIALS=/home/pi/.ssh/bucket.json sudo -E python /home/pi/hack_week_py/main.py 2>&1 > /home/pi/logs/out.log
+s
