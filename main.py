@@ -5,9 +5,10 @@ from utils import reset_onboard_led, read_test_switch
 reset_onboard_led()
 
 if __name__ == '__main__':
-    if read_test_switch():
-        print('running test pattern')
-        test_main()
-    else:
-        print('running slideshow')
-        slideshow_main()
+    while True:
+        if read_test_switch():
+            print('running test pattern')
+            test_main()
+        else:
+            print('running slideshow')
+            slideshow_main()

@@ -67,24 +67,23 @@ def display_ip():
         print('error displaying ip')
 
 def slideshow_main():
-    display_ip()
-    while True:
-        # allowing only blobs - files need to be < 1MB
-        for blob in bucket.list_blobs():
-            print("Display " + str(blob))
+    # display_ip()
+    # allowing only blobs - files need to be < 1MB
+    for blob in bucket.list_blobs():
+        print("Display " + str(blob))
 
-            # saving to a temp file because imread cannot read binary from memory
-            try:
-                tmp_file = open('/tmp/led_blob', 'wb')
-                blob.download_to_file(tmp_file)
-                tmp_file.close()
+        # saving to a temp file because imread cannot read binary from memory
+        try:
+            tmp_file = open('/tmp/led_blob', 'wb')
+            blob.download_to_file(tmp_file)
+            tmp_file.close()
 
-                image_data = misc.imread('/tmp/led_blob')
+            image_data = misc.imread('/tmp/led_blob')
 
-                blink_onboard_led()
+            blink_onboard_led()
 
-                update_screen(image_data)
-            except:
-                print("Error displaying blob")
+            update_screen(image_data)
+        except:
+            print("Error displaying blob")
 
-            time.sleep(DELAY_SECONDS)
+        time.sleep(DELAY_SECONDS)
