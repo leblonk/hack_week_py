@@ -6,7 +6,7 @@ Wants=network.target network-online.target
 [Service]
 Type=idle
 User=pi
-ExecStart=/home/pi/hack_week/run.sh
+ExecStart=/home/pi/hack_week_py/run.sh
 
 [Install]
 WantedBy=multi-user.target
