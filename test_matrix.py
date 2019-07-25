@@ -30,12 +30,15 @@ def update_screen(data):
         pygame.event.get()
 
 
-def set_pixel_color((x, y), (r, g, b)):
+def set_pixel_color(point, color):
+    x,y = point
+    r,g,b = color
     i = get_serial_pixel(x, y, SCREEN_Y)
     strip.setPixelColor(i, Color(r, g, b))
 
 
-def get_rgb(data, (x, y)):
+def get_rgb(data, point):
+    x,y = point
     try:
         (r, g, b) = data[y][x]
     except:
