@@ -1,7 +1,7 @@
 import time
 
 import pygame
-from PIL import Image, ImageDraw
+import Image, ImageDraw
 from google.cloud import storage
 from neopixel import *
 from scipy import imageio
